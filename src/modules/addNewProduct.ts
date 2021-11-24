@@ -6,32 +6,44 @@ const AddingNewProductToStore = {
     
     addEvents: function(){
         let elemAdd = document.querySelector(".btn-block_add"); 
-        elemAdd.addEventListener("click", this.addNewProduct);     
+        elemAdd!.addEventListener("click", this.addNewProduct);     
         
         let elemRes = document.querySelector(".btn-block_resset");
-        elemRes.addEventListener("click", this.resetForm);
+        elemRes!.addEventListener("click", this.resetForm);
     },
     
-    addNewProduct: function(e){
-        let form = document.addingNewProductForm;
-        let product = {};
-        let products = [];
-        product.tittle = form.tittle.value;
-        product.description = form.description.value;
-        product.image = form.ImageUrl.value;
-        product.category = form.category.value;
+    addNewProduct: function(this: HTMLElement, e : Event){
+        let form = document.getElementsByName("addingNewProductForm")[0];
+        let tittle = form.children.namedItem("tittle")?.nodeValue;
+        let description = form.children.namedItem("description")?.nodeValue;
+        let image = form.children.namedItem("ImageUrl")?.nodeValue;
+        let category = form.children.namedItem("category")?.nodeValue;
 
-        if(product.tittle == "" || product.description == "")
+        if(tittle == "" || description == "")
         {
             // e.preventDefault()
             return;
         }
-        if(product.image == "")
+        if(image == "")
         {
-            product.image = "Service/noImage.png";
+            image = "Service/noImage.png";
         }
 
-        let storedPproducts = JSON.parse(localStorage.getItem("products"));
+        let product = {
+            tittle,
+            description,
+            image,
+            category,
+        };
+        let products = [];
+
+        let jsonProd = localStorage.getItem("products");
+        if(jsonProd == null)
+        {
+            jsonProd = "";
+        }
+
+        let storedPproducts = JSON.parse(jsonProd);
         if(storedPproducts !== null)
         {
             products = storedPproducts;        
@@ -40,7 +52,7 @@ const AddingNewProductToStore = {
         products[index] = product;
         localStorage.setItem("products", JSON.stringify(products));
 
-        console.log("Added new product: \n" + form.tittle.value +"\n" + form.description.value);
+        console.log("Added new product: \n" + product.tittle +"\n" + product.description);
     },
 
     resetForm: function(){

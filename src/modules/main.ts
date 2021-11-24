@@ -2,9 +2,15 @@
 
 console.log("main.js is loading...");
 
-import {ButtonAdding} from './mainAddToBasket.js';
-import {UpdateBasketCountIcon} from './basket.js';
+import {ButtonAdding} from './mainAddToBasket';
+import {UpdateBasketCountIcon} from './basket';
 
+type product = {
+    tittle: string;
+    description: string;
+    image: string;
+    category: string;
+}
 
 const App = {
     product: {
@@ -35,8 +41,8 @@ const App = {
         UpdateBasketCountIcon();
     },
 
-    UpdateListOfProductsOnMainPage: function(categoryFilter){
-        let allProducts = this.getAllProductsInStore()
+    UpdateListOfProductsOnMainPage: function(categoryFilter?: string){
+        let allProducts: product[] = this.getAllProductsInStore()
         let length = allProducts.length;
         if(length < 1)
         {
@@ -83,7 +89,7 @@ const App = {
             elemProd.appendChild(elemBut);
             
             let mainItems = document.querySelector(".main__items");
-            mainItems.appendChild(elemProd);                
+            mainItems!.appendChild(elemProd);                
         }   
     },
 
@@ -106,7 +112,12 @@ const App = {
     },
 
     getAllProductsInStore: () => {
-        let products = JSON.parse(localStorage.getItem("products"));
+        let jsonProd = localStorage.getItem("products");
+        if(jsonProd == null)
+        {
+            jsonProd = "";
+        }
+        let products = JSON.parse(jsonProd);
         if(products === null)
         {
             products = [];
@@ -130,12 +141,12 @@ const App = {
         return products;
     },
 
-    initializeNewStorage: function(products){
+    initializeNewStorage: function(products: product[]){
         localStorage.setItem("products", JSON.stringify(products));
     },
 
-    showProductsInCategory: function(e){
-        const catId = e.target.id;
+    showProductsInCategory: function(this: HTMLElement, e : Event){
+        const catId = this.id;
         let categoryFilter = catId.substring(3);    
         App.UpdateListOfProductsOnMainPage(categoryFilter);
         App.UpdateMainPage();
@@ -148,7 +159,7 @@ const App = {
         
         for (let i = 0; i < length; i++) {
             let element = products[0];
-            mainElem.removeChild(element);
+            mainElem!.removeChild(element);
         }
     },
 

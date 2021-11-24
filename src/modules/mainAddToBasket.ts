@@ -1,25 +1,35 @@
 "use strict";
 
-import {UpdateBasketCountIcon} from './basket.js';
+import {UpdateBasketCountIcon} from './basket';
 
 export const ButtonAdding = {
     
-    addNewProduct: (e) => {
-        let product = {};
+    addNewProduct: function(this: HTMLElement, e : Event) {
+        let product = {
+            tittle: "",
+            description: "",
+            image: "",
+            category: "",
+        };
         let products = [];
         let length = 0;
-        let elem = e.target;
+        let elem = this;
 
-        elem.value = "Added";
+        elem.nodeValue = "Added";
         elem.style.color = "#4caf50";
         elem.style.fontStyle = "italic";
         elem.style.fontWeight = "bold";
         // var elem = document.querySelector(".main__items__item--button");  
         
-        product.tittle = e.target.parentElement.children[0].textContent;
-        product.description = e.target.parentElement.children[2].textContent;
+        product.tittle = elem.parentElement!.children[0].textContent!;
+        product.description = elem.parentElement!.children[2].textContent!;
 
-        let storedPproducts = JSON.parse(sessionStorage.getItem("products"));
+        let jsonProd = localStorage.getItem("products");
+        if(jsonProd == null)
+        {
+            jsonProd = "";
+        }
+        let storedPproducts = JSON.parse(jsonProd);
         if(storedPproducts !== null)
         {
             products = storedPproducts;

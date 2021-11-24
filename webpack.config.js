@@ -4,9 +4,9 @@ module.exports = {
     mode: 'development',
     context: path.resolve(__dirname, 'src'),
     entry: {
-        main: "./modules/main.js",
-        basket: "./modules/basket.js",
-        addNewProduct: "./modules/addNewProduct.js",
+        main: "./modules/main.ts",
+        basket: "./modules/basket.ts",
+        addNewProduct: "./modules/addNewProduct.ts",
     },
     module: {
         rules: [

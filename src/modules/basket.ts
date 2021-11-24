@@ -41,13 +41,21 @@ const Basket = {
                 elemProd.appendChild(elemSt);
                 
                 let mainItems = document.querySelector(".basket__items");
-                mainItems.appendChild(elemProd);                
+                mainItems!.appendChild(elemProd);                
             }           
         }
     },
 
     getAddedProducts: () => {
-        let products = JSON.parse(sessionStorage.getItem("products"));
+
+        let jsonProd = localStorage.getItem("products");
+        if(jsonProd == null)
+        {
+            jsonProd = "";
+        }
+
+        let products = JSON.parse(jsonProd);
+
         if(products === null)
         {
             products = [];
@@ -58,14 +66,20 @@ const Basket = {
 }
 
 export const UpdateBasketCountIcon = () => {
-    let prods = JSON.parse(sessionStorage.getItem("products"));
+    let jsonProd = localStorage.getItem("products");
+        if(jsonProd == null)
+        {
+            jsonProd = "";
+        }
+
+    let prods = JSON.parse(jsonProd);
     let elem = document.querySelector(".header__basket--counter");
     let count = 0;
     if(prods !== null)
     {
         count = prods.length;
     }
-    elem.textContent = count;
+    elem!.textContent = count as unknown as string;
 }  
 
 Basket.UpdateBasketPage();
