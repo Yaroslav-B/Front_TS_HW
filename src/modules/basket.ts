@@ -48,15 +48,15 @@ const Basket = {
 
     getAddedProducts: () => {
 
-        let jsonProd = localStorage.getItem("products");
+        let jsonProd = sessionStorage.getItem("products");
         if(jsonProd == null)
         {
-            jsonProd = "";
+            return new Array();
         }
 
         let products = JSON.parse(jsonProd);
 
-        if(products === null)
+        if(products == null)
         {
             products = [];
         }
@@ -66,19 +66,20 @@ const Basket = {
 }
 
 export const UpdateBasketCountIcon = () => {
-    let jsonProd = localStorage.getItem("products");
-        if(jsonProd == null)
-        {
-            jsonProd = "";
-        }
 
-    let prods = JSON.parse(jsonProd);
-    let elem = document.querySelector(".header__basket--counter");
+    let prods: string[] | null = null;
+    let jsonProd = sessionStorage.getItem("products");
+    if(jsonProd != null)
+    {
+        prods = JSON.parse(jsonProd);
+    }
+    
     let count = 0;
-    if(prods !== null)
+    if(prods != null)
     {
         count = prods.length;
     }
+    let elem = document.querySelector(".header__basket--counter");
     elem!.textContent = count as unknown as string;
 }  
 

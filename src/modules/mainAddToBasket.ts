@@ -11,7 +11,7 @@ export const ButtonAdding = {
             image: "",
             category: "",
         };
-        let products = [];
+        let products: string[] | { tittle: string; description: string; image: string; category: string; }[] = [];
         let length = 0;
         let elem = this;
 
@@ -24,13 +24,15 @@ export const ButtonAdding = {
         product.tittle = elem.parentElement!.children[0].textContent!;
         product.description = elem.parentElement!.children[2].textContent!;
 
-        let jsonProd = localStorage.getItem("products");
-        if(jsonProd == null)
+        let storedPproducts = null;
+        let jsonProd = sessionStorage.getItem("products");
+        
+        if(jsonProd != null)
         {
-            jsonProd = "";
+            storedPproducts = JSON.parse(jsonProd);
         }
-        let storedPproducts = JSON.parse(jsonProd);
-        if(storedPproducts !== null)
+        
+        if(storedPproducts != null)
         {
             products = storedPproducts;
             length = storedPproducts.length;

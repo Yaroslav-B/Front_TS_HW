@@ -115,7 +115,7 @@ const App = {
         let jsonProd = localStorage.getItem("products");
         if(jsonProd == null)
         {
-            jsonProd = "";
+            return new Array();
         }
         let products = JSON.parse(jsonProd);
         if(products === null)

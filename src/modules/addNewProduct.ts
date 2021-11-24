@@ -13,11 +13,16 @@ const AddingNewProductToStore = {
     },
     
     addNewProduct: function(this: HTMLElement, e : Event){
-        let form = document.getElementsByName("addingNewProductForm")[0];
-        let tittle = form.children.namedItem("tittle")?.nodeValue;
-        let description = form.children.namedItem("description")?.nodeValue;
-        let image = form.children.namedItem("ImageUrl")?.nodeValue;
-        let category = form.children.namedItem("category")?.nodeValue;
+        let tittleElem = document.getElementsByName("tittle")[0] as HTMLInputElement;
+        let descriptionElem = document.getElementsByName("description")[0] as HTMLInputElement;
+        let imageElem = document.getElementsByName("ImageUrl")[0] as HTMLInputElement;
+        let categoryElem = document.getElementsByName("category")[0] as HTMLSelectElement;
+
+        let tittle = tittleElem.value;
+        let description = descriptionElem.value;
+        let image = imageElem.value;
+        let category = categoryElem.value;
+
 
         if(tittle == "" || description == "")
         {
@@ -37,14 +42,14 @@ const AddingNewProductToStore = {
         };
         let products = [];
 
+        let storedPproducts = null;
         let jsonProd = localStorage.getItem("products");
-        if(jsonProd == null)
+        if(jsonProd != null)
         {
-            jsonProd = "";
+            storedPproducts = JSON.parse(jsonProd);
         }
-
-        let storedPproducts = JSON.parse(jsonProd);
-        if(storedPproducts !== null)
+        
+        if(storedPproducts != null)
         {
             products = storedPproducts;        
         }
