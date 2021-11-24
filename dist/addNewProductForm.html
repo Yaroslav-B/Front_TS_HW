@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Styles/addingForm.css"/>
+    <title>Adding form</title>
+</head>
+<body>
+    <div class="testbox">
+        <form name="addingNewProductForm">
+          <div class="banner">
+            <h1>Adding Form</h1>
+          </div>
+          <div class="item">
+            <p>Tittle</p>
+            <div class="name-item">
+              <input type="text" name="tittle" placeholder="Tittle" required />
+            </div>
+          </div>
+          <div class="item">
+            <label for="Category">Category:</label>
+                <select id="category" name="category">
+                    <option value="Others">Others</option>
+                    <option value="Smartphones">Smartphones</option>
+                    <option value="SmartWatches">SmartWatches</option>
+                    <option value="ComputerMouses">ComputerMouses</option>
+                </select>
+          </div>
+          <div class="item">
+            <p>Description</p>
+            <textarea rows="3" name="description" placeholder="Description" required></textarea>
+          </div>
+          <p>Image URL</p>
+            <div class="image-block">
+              <input type="url" name="ImageUrl" placeholder="URL" />
+            </div>
+          <div class="btn-block">
+            <button class="btn-block_add" type="submit" >Add</button>
+            <button class="btn-block_resset" type="reset" >Resset</button>
+          </div>
+          <a id="refBackHome" href="index.html">&laquo;Back home</a>
+        </form>
+      </div>
+      <script src="addNewProduct.js"></script>
+</body>
+</html>
